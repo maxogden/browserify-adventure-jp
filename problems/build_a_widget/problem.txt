@@ -1,40 +1,35 @@
-This time the verifier will call your code. It will do something like this:
+今回は検証プログラムがあなたのコードを実行します。以下のような具合です:
 
   var Widget = require('widget');
   var w = Widget();
   w.setName('beep boop');
   w.appendTo(document.body);
 
-You should implement the widget module that will be loaded with
-`require('widget')`. Your widget module should create an html element from
-the html string:
+この `require('widget')` によって呼び出されるwidgetモジュールを実装してください。
+widgetモジュールはhtmlのエレメントを次のようなHTMLの文字列から生成します。
 
   <div>Hello <span class="name"></span>!</div>
 
-To turn this html string into a dom element, you can use the domify package
-from npm:
+この文字列をDOMの要素にするにはnpmのdomfyパッケージを利用します。
 
   npm install domify
 
-and then do `require('domify')` to get a `domify(html)` function that
-returns html elements. Otherwise you can create a dom element with
-`document.createElement('div')` and then set its innerHTML directly.
+`require('domify')` してHTML要素を返す `domify(html)` 関数を呼び出します。
+もしくはDOM要素を `document.createElement('div')` で生成し、innerHTMLに
+直接割り当てることもできます。
 
-Your widget module will need to implement `w.setName(str)` and
-`w.appendTo(target)`. `w.setName(str)` will need to update the "name"
-span's inner context with `str`. You can set the span element's
-`.textContent` once you have a handle on the span which you can obtain with
-`elem.querySelector('css selector goes here')`.
+widgetモジュールは `w.setName(str)` と `w.appendTo(target)` を実装している必要があります。
+`w.setName(str)` は "name" spanタグの内部コンテキストを `str` で更新します。
+`elem.querySelector('cssセレクタ')` によって得られたspan要素の
+ ハンドルに対し `.textContent` を設定できます。
 
-You will also need to implement `w.appendTo(target)`, which appends the
-widget's internal html element to `target`. You can use
-`target.appendChild(elem)` to append the widget's element to the target.
+`w.appendTo(target)` は widget の内部HTML要素に `target` を追加します。
+`target.appendChild(elem)` を利用してwidgetの要素に `target` を追加できます。
 
-Compile your program with `browserify -r ./widget.js:widget` to create a
-bundle that will expose `require('widget')` to the environment and pipe the
-bundle output into `$ADVENTURE_COMMAND verify` like this:
+プログラムを `browserify -r ./widget.js:widget` としてコンパイルして `require('widget')`
+をエクスポーズし、それを `$ADVENTURE_COMMAND verify` にパイプしてください:
 
   browserify -d -r ./widget.js:widget | $ADVENTURE_COMMAND verify
 
-The `-d` turns on debug mode so you will get a stack trace with the proper
-line offsets if there is an error.
+`-d` によってデバッグモードがオンになり、エラーが発生した場合にはスタックトレースが
+出力されます。
