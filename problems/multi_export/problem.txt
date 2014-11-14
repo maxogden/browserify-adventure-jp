@@ -1,30 +1,29 @@
-Last time in "single export" we used `module.exports` to export a single
-function. There is another form called simply `exports` that you can attach
-properties to. This is a less common way of exporting functionality but is
-still useful in some circumstances, such as a protocol with `.parse()` and
-`.stringify()` functions which are the inverses of each other.
+e export" では `module.exports` を使って一つの関数をエクスポート
+しました。もうひとつエクスポートの方法があって、それは `exports` オブジェクトを
+使うことです。このオブジェクトにプロパティを設定することでエクスポートが可能になります。
+こちらはどちらかというと機能のエクスポート方法としては一般的ではありませんが、それでも
+いくつかの状況では有用です。たとえば `.parse()` と `stringify()` のように、性質の
+全く異なったものをエクスポートするような場合です。
 
-For this level, call `prompt()` twice from your entry file to obtain 2
-values: the first is a string you should parse into an array of objects and
-the second value is an array you should serialize back into a string. Print
-each return value with `console.log()`.
+この段階では `prompt()` をエントリーファイルから二度呼び出して二つの値を読み取ります。
+最初の値はオブジェクトの配列にパースするための文字列。二つ目の値はその逆にオブジェクトに
+パースするための配列です。 `console.log()` を利用してそれぞれ出力してください。
 
-In a second file `./ndjson.js`, export a `parse()` and `stringify()`
-function by assigning properties onto the `exports` object.
+`./ndjson.js` というファイルを作成し、 `parse()` と `stringify()` という関数を
+`export` オブジェクトにプロパティを設定することにより、エクスポートしてください。
 
-`.parse(str)` will get a newline-separated string `str` of json stringified
-json and should use JSON.parse() to parse each line of json into an array
-of results
+`.parse(str)` は `JSON.stringify()` された形式の改行によって区切られた文字列 `str`
+ を受け取り、 `JSON.parse()` を利用して各行をパースし、結果を配列に格納してください。
 
-`.stringify(rows)` will get an array of `rows` and should return a
-newline-separated string of records with JSON.stringify()
+`.stringify(rows)` は `rows` に配列を受け取り、 `JSON.stringify()` で各配列を
+文字列に変換し、改行区切りの文字列を返すようにしてください。
 
-Compile your program with `browserify` starting at your entry file
-and pipe the bundle into `$ADVENTURE_COMMAND verify` like this:
+
+プログラムができたらエントリーファイルを `browserify` でコンパイルし、
+`$ADVENTURE_COMMAND verify` にパイプで渡してください:
 
   browserify main.js | $ADVENTURE_COMMAND verify
 
-If you just want to run your solution with the test input without verifying
-it you can do:
+検証なしでプログラムを走らせたい場合には以下のようにします。
 
   browserify main.js | $ADVENTURE_COMMAND run
