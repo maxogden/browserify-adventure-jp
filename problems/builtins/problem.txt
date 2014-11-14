@@ -1,43 +1,42 @@
-browserify includes browser-compatible versions of many of the modules from
-node core such as: url, path, querystring, events, stream, util and more!
-This means that many modules written for node without the browser in mind
-will just work.
+browserifyはブラウザコンパチブルのNodeコアモジュールを多数含んでいます。
+例えばurl, path, querystring, events, stream, utilなどなど。
+このため、ブラウザを意識することなくNode向けに書かれたモジュールもブラウザ上で
+動くということです！
 
-For this level, `prompt()` will return a web address.
-Parse the address's query string and print the "file" parameter from the
-query string relative to the rest of the web address.
+今回は `prompt()` はウェブのアドレスを返します。
+このアドレスのクエリ文字列をパースし、そのなかの "file" パラメータをウェブアドレス
+につなげて出力するようにします。
 
-For example, this address:
+たとえば、次のアドレス:
 
   http://substack.net/filez/dogez/img.cgi?file=../hi/doge.gif
 
-should print:
+これを以下のように出力するようにします。
 
   http://substack.net/filez/hi/doge.gif
 
-Instead of using a hand-rolled parser, there are some very handy functions
-from node core you can use from the url and querystring modules.
+手製のパーサを使う代わりに、Nodeのコアモジュールが便利なのでそれを使いましょう。
+urlモジュールとquerystringモジュールです。
 
-* url.parse(addr) takes a web address string and returns an object with all
-the components of the url. In particular you will want the "query" property
-from the result.
+* url.parse(addr) はウェブアドレスの文字列を受け取り、そのURLの全てのコンポーネント
+をオブジェクトとして返します。そのコンポーネントのうち、"query"プロパティは
+必要になるでしょう。
 
-* url.resolve(baseAddr, path) resolve the `path` string with respect to the
-baseAddr url.
+* url.resolve(baseAddr, path) は `path` 文字列を baseAddr URLに対して解決します。
 
-* querystring.parse(str) takes a querystring string `str` and returns an
-object mapping querystring keys to values
+* querystring.parse(str) は クエリ文字列 `str` を受け取り、キーと値にマッピングした
+オブジェクトを返します。
 
-Just `require('url')` and `require('querystring')` to get each of these
-modules. You don't need to run `npm install` for url or querystring because
-they are built into browserify similarly to how they are built into node.
+`require('url')` と `require('querystring')` を利用するだけでこれらの関数が利用可能に
+なります。 `npm install` を実行する必要はありません。これらはNodeのようにbrowserifyに
+あらかじめ組み込まれています。
 
-Compile your program with `browserify` and pipe the bundle into
-`$ADVENTURE_COMMAND verify` like this:
+
+プログラムができたらエントリーファイルを `browserify` でコンパイルし、
+`$ADVENTURE_COMMAND verify` にパイプで渡してください:
 
   browserify main.js | $ADVENTURE_COMMAND verify
 
-If you just want to run your solution with the test input without verifying
-it you can do:
+検証なしでプログラムを走らせたい場合には以下のようにします。
 
   browserify main.js | $ADVENTURE_COMMAND run
