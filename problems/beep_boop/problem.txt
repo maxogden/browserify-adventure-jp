@@ -1,20 +1,19 @@
-First of all, make sure you have `browserify` installed as a command in
-your $PATH.
+はじめに、 `browserify` が $PATH にインストールされているか確かめてみましょう。
 
-You can do this by running:
+次のコマンドを実行してください。
 
   npm install -g browserify
 
-If you get permission errors, try putting `sudo` in front of that command.
+もしパーミッションエラーが出るようなら `sudo` を利用してください。
 
-Once you have browserify installed, write a program that prints the string
-'BEEP BOOP' using `console.log()`.
+browserify がインストールされたら、'BEEP BOOP` という文字列を `console.log` を
+使って出力するプログラムを作成してみましょう。
 
-Compile your program with `browserify` and pipe the bundle into
-`$ADVENTURE_COMMAND verify` like this:
+`browserify` を利用してプログラムをコンパイルし、その結果を `$ADVENTURE_COMMAND verify`
+に以下のようにパイプでつないでください。
 
   browserify main.js | $ADVENTURE_COMMAND verify
 
-If you just want to run your solution without verifying you can do:
+検証なしでプログラムを走らせたい場合には以下のようにします。
 
   browserify main.js | $ADVENTURE_COMMAND run
