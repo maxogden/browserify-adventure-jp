@@ -1,28 +1,23 @@
-In the last adventure we used a package from npm. This time, we will factor
-our code into 2 files using a relative `require()` call and
-`module.exports`.
+前回のアドベンチャーではnpmモジュールを利用しました。今回は `require()` と `module.exports`
+を使ってコードを二つのファイルに分けます。
 
-First, create a file called `uniquely.js`. In this file, assign a function
-to `module.exports` that takes a comma-separated string as input and
-returns a uniq list as output. Use the `uniq` module like from the "using
-npm packages" level.
+はじめに、 `uniquely.js` というファイルを作成します。このファイルでは関数を `module.exports`
+に割り当てます。カンマ区切りの文字列を入力として受け取り、uniqを使って重複要素を削除したリスト
+を出力する関数です。 `uniq` モジュールを前回のように使ってください。
 
-Now in your entry file (the file that you pass to the browserify command),
-use `require()` with a relative path string to your `'./uniquely.js'`
-file.
+次にエントリーファイル（browserifyコマンドに引数として渡すファイルです）のなかで `require()` を
+利用し、先ほどの `'./uniquely.js'` を相対パスを使って読み込んでください。
 
-When you `require()` the `uniquely.js` file, `require()` will return
-whatever value you set `module.exports` to in `uniquely.js`. Call the
-exported function with the value from `prompt()` as an argument and print
-the return value with `console.log()`.
+`require()` で `uniquely.js` ファイルを読み込む際、 `require()` は `uniquely.js` 内の
+`module.exports` に設定された値を返します。`prompt()` からの値をエクスポートされた
+関数に渡し、実行結果を `console.log()` を利用して出力しましょう。
 
-Compile your program with `browserify` starting at your entry file (NOT
-starting from uniquely.js) and pipe the bundle into
-`$ADVENTURE_COMMAND verify` like this:
+プログラムができたらエントリーファイルを `browserify` でコンパイルし（uniquely.jsではありませんよ）
+`$ADVENTURE_COMMAND verify` にパイプで渡してください:
 
   browserify main.js | $ADVENTURE_COMMAND verify
 
-If you just want to run your solution with the test input without verifying
-it you can do:
+検証なしでプログラムを走らせたい場合には以下のようにします。
 
   browserify main.js | $ADVENTURE_COMMAND run
+
