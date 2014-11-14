@@ -1,27 +1,28 @@
-Now that we have browserify up and running, let's use a module from npm!
+さあ browserify を利用する準備が整いました。次にnpmのパッケージを利用してみましょう！
 
-First install the `uniq` module from npm by doing:
+はじめに `uniq` モジュールをインストールしてみます:
 
   npm install uniq
 
-npm should have put uniq into `./node_modules/uniq`. browserify uses the
-same module-lookup algorithm as node.js, so you can just `require('uniq')`
-just like you would do in node.js!
+npmコマンドは `uniq` モジュールを `./node_modules/uniq` にインストールします。
+browserifyはNodeと同様のモジュール検出アルゴリズムを利用しています。ですから
+Nodeのプログラム内でやっているように `require('uniq')` とするだけで読み込みが可能です！
 
-`require('uniq')` returns a `uniq(xs)` function that removes duplicate
-items from an array input `xs`.
+`require('uniq')` は `uniq(xs)` 関数を返します。これは配列の入力 `xs` から
+重複する要素を取り除きます。
 
-For this level, use `prompt()` to fetch a string. Split the string that
-`prompt()` returns by commas (`str.split(',')` returns a separated array of
-strings) and run this array through `uniq()` to discard repeated items.
-Use `console.log()` to print the resulting uniq array.
+この段階では `prompt()` を利用して文字列を受け取ってください。
+`prompt()` が返す文字列を (`str.split(',')` を利用して区切って配列に格納し、
+さらにこの配列を `uniq()` に通し、重複要素をなくすようにしてください。
+それから `console.log()` を利用して出力してください。
 
-Compile your program with `browserify` and pipe the bundle into
-`$ADVENTURE_COMMAND verify` like this:
+プログラムを `browserify` を使ってコンパイルし、 `$ADVENTURE_COMMAND verify`
+にパイプしてください:
 
   browserify main.js | $ADVENTURE_COMMAND verify
 
-If you just want to run your solution with the test input without verifying
-it you can do:
+
+検証なしでプログラムを走らせたい場合には以下のようにします。
 
   browserify main.js | $ADVENTURE_COMMAND run
+
